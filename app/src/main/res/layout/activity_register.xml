@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shwetadsa.bets.Register">
+
+    <TextView
+        android:id="@+id/tvSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:text="Create your new account!"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etFname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvSignup"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etLastname"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/etFname"
+        android:layout_alignBottom="@+id/etFname"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/etMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etFname"
+        android:layout_alignStart="@+id/etFname"
+        android:layout_below="@+id/etFname"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="Email Address "
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etMail"
+        android:layout_alignStart="@+id/etMail"
+        android:layout_below="@+id/etMail"
+        android:layout_marginTop="26dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="Contact No. "
+        android:background="@drawable/border"/>
+
+    <EditText
+        android:id="@+id/etUname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etContact"
+        android:layout_alignStart="@+id/etContact"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter Username"
+        android:background="@drawable/border"/>
+
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etUname"
+        android:layout_alignStart="@+id/etUname"
+        android:layout_below="@+id/etUname"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:background="@drawable/border"
+        android:inputType="textPassword"
+        android:hint="Enter Password"/>
+
+    <EditText
+        android:id="@+id/etCpass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etPass"
+        android:layout_alignStart="@+id/etPass"
+        android:layout_below="@+id/etPass"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:background="@drawable/border"
+        android:inputType="textPassword"
+        android:hint="Re-enter Password"/>
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etCpass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:text="Sign me up" />
+</RelativeLayout>
