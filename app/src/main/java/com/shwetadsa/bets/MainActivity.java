@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                                     edit.putString("Contact",document.getString("Contact"));
                                     edit.putString("First Name",document.getString("First Name"));
                                     edit.putString("Last Name",document.getString("Last Name"));
+                                    edit.putInt("Amount",document.getLong("Amount").intValue());
+                                    edit.putInt("Age", document.getLong("Age").intValue());
                                     //edit.putString("Code",document.getString("Code"));
                                     edit.commit();
                                     startActivity(new Intent(MainActivity.this, firstpage.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));

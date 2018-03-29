@@ -77,13 +77,14 @@
         android:id="@+id/etUname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etContact"
-        android:layout_alignStart="@+id/etContact"
-        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/tvLoc"
+        android:layout_alignStart="@+id/tvLoc"
+        android:layout_below="@+id/etAge"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/border"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Enter Username"
-        android:background="@drawable/border"/>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etPass"
@@ -92,11 +93,11 @@
         android:layout_alignLeft="@+id/etUname"
         android:layout_alignStart="@+id/etUname"
         android:layout_below="@+id/etUname"
-        android:layout_marginTop="19dp"
-        android:ems="10"
+        android:layout_marginTop="18dp"
         android:background="@drawable/border"
-        android:inputType="textPassword"
-        android:hint="Enter Password"/>
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/etCpass"
@@ -105,18 +106,53 @@
         android:layout_alignLeft="@+id/etPass"
         android:layout_alignStart="@+id/etPass"
         android:layout_below="@+id/etPass"
-        android:layout_marginTop="21dp"
-        android:ems="10"
+        android:layout_marginTop="17dp"
         android:background="@drawable/border"
-        android:inputType="textPassword"
-        android:hint="Re-enter Password"/>
+        android:ems="10"
+        android:hint="Re-enter Password"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/etCpass"
+        android:layout_alignRight="@+id/etCpass"
         android:layout_below="@+id/etCpass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="23dp"
         android:text="Sign me up" />
+
+    <TextView
+        android:id="@+id/tvLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etContact"
+        android:layout_alignStart="@+id/etContact"
+        android:layout_below="@+id/etContact"
+        android:layout_marginTop="18dp"
+        android:text="Your Location:" />
+
+    <Spinner
+        android:id="@+id/spnLoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etAge"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/tvLoc"
+        android:layout_toRightOf="@+id/tvLoc" />
+
+    <EditText
+        android:id="@+id/etAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etUname"
+        android:layout_alignStart="@+id/etUname"
+        android:layout_below="@+id/tvLoc"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="Enter age"
+        android:inputType="number" />
+
 </RelativeLayout>
