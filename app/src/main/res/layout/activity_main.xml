@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shwetadsa.bets.MainActivity">
+    tools:context="com.shwetadsa.bets.MainActivity"
+    android:background="@drawable/mainpage">
 
     <TextView
         android:id="@+id/tvWelcome"
@@ -28,7 +29,8 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="31dp"
         android:text="Username : "
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvPass"
@@ -39,7 +41,8 @@
         android:layout_below="@+id/tvUname"
         android:layout_marginTop="16dp"
         android:text="Password : "
-        android:textSize="18dp" />
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/etUname"
@@ -49,10 +52,12 @@
         android:layout_alignBottom="@+id/tvUname"
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
+        android:background="@drawable/border"
         android:layout_toEndOf="@+id/tvUname"
         android:layout_toRightOf="@+id/tvUname"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/etPass"
@@ -63,16 +68,22 @@
         android:layout_alignLeft="@+id/etUname"
         android:layout_alignStart="@+id/etUname"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:background="@drawable/border"
+        android:inputType="textPassword"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etPass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="#ffffff"
+        android:background="#caf4e23f"
+        android:textStyle="bold"
+        android:textSize="23sp"/>
 
     <TextView
         android:id="@+id/tvOR"
@@ -82,16 +93,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
         android:text="OR"
-        android:textSize="26sp" />
+        android:textColor="#ffffff"
+        android:textSize="33sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnReg"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnLogin"
-        android:layout_alignStart="@+id/btnLogin"
         android:layout_below="@+id/tvOR"
-        android:layout_marginTop="36dp"
-        android:text="register" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:background="#cbf4e23f"
+        android:text="register"
+        android:textColor="#ffffff"
+        android:textSize="23sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

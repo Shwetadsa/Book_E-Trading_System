@@ -30,8 +30,8 @@ public class Register extends AppCompatActivity {
     Button btnSignup;
     Spinner spnLoc;
     FirebaseFirestore db ;
-    private String fname, lname, email, contact, uname, pass, confirm_pass, location;
-    private int age;
+    private String fname, lname, email, contact, uname, pass, confirm_pass, location, age;
+    //private int newage;
     String[] loc;
     ArrayAdapter<String> adapter;
 
@@ -84,11 +84,12 @@ public class Register extends AppCompatActivity {
         uname = etUname.getText().toString().trim();
         pass = etPass.getText().toString().trim();
         confirm_pass = etCpass.getText().toString().trim();
-        age = Integer.parseInt(etAge.getText().toString());
+        age = etAge.getText().toString().trim();
     }
 
     public boolean validate(){
         boolean valid = true;
+        //newage = Integer.parseInt(age);
         if (fname.isEmpty()){
             etFname.setError("Please enter valid first name");
             valid=false;
@@ -105,7 +106,7 @@ public class Register extends AppCompatActivity {
             etContact.setError("Please enter a valid mobile number");
             valid=false;
         }
-        if (age<1 && age>99){
+        if (age.isEmpty() || age.length()>2){
             etAge.setError("Please enter a valid age");
             valid = false;
         }
@@ -151,6 +152,8 @@ public class Register extends AppCompatActivity {
                 int p = spnLoc.getSelectedItemPosition();
                 location =loc[p];
 
+                int newage = Integer.parseInt(age);
+
                 Map<String, Object> m = new HashMap<>();
                 m.put("First Name", fname);
                 m.put("Last Name", lname);
@@ -159,7 +162,7 @@ public class Register extends AppCompatActivity {
                 m.put("Username", uname);
                 m.put("Password", pass);
                 m.put("Amount", 100);
-                m.put("Age", age);
+                m.put("Age", newage);
                 m.put("Location",location);
                 db.collection("users").document(uname).set(m).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

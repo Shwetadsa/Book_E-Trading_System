@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Register" />
-        <activity android:name=".firstpage"></activity>
+        <activity android:name=".firstpage" />
+        <activity android:name=".addbook"></activity>
     </application>
 
 </manifest>

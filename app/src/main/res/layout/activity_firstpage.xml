@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shwetadsa.bets.firstpage">
+    tools:context="com.shwetadsa.bets.firstpage"
+    android:background="@drawable/bookafterlogin">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvWel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="27dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:background="#bf000000"/>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvWel"
+        android:layout_marginTop="100dp"
+        android:text=" + add a book to collection" />
+
+    <Button
+        android:id="@+id/btnBrowse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnAdd"
+        android:layout_marginTop="69dp"
+        android:text="Browse books" />
+
+    <Button
+        android:id="@+id/btnReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnBrowse"
+        android:layout_marginTop="53dp"
+        android:text="Return Book" />
+</RelativeLayout>

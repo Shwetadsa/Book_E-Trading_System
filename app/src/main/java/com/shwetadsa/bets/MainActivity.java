@@ -37,71 +37,79 @@ public class MainActivity extends AppCompatActivity {
         btnReg = findViewById(R.id.btnReg);
         // Access a Cloud Firestore instance from your Activity
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final SharedPreferences userdata = getSharedPreferences("UserData", Context.MODE_PRIVATE);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String uname = etUname.getText().toString();
-                final String pass = etPass.getText().toString();
+        try{
+            if (userdata.getString("Type", null).equals("LoggedIn")){
+                startActivity(new Intent(MainActivity.this, firstpage.class));
+                finish();
+            }
+        } catch (Exception e) {
 
-                if (uname.length() == 0){
-                    Snackbar.make(v, "Enter your username", Snackbar.LENGTH_LONG).show();
-                    etUname.requestFocus();
-                    return;
-                }
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String uname = etUname.getText().toString();
+                    final String pass = etPass.getText().toString();
 
-                if (pass.length() == 0){
-                    Snackbar.make(v, "Enter your password", Snackbar.LENGTH_LONG).show();
-                    etPass.requestFocus();
-                    return;
-                }
-
-                //check if uname and password exist in database and allow/disallow access accordingly; use finish
-                DocumentReference ref =db.collection("users").document(uname);
-                ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document != null && document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                if(document.get("Password").equals(pass)) {
-                                    SharedPreferences userdata = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor edit = userdata.edit();
-                                    edit.putString("Username",document.getString("Username"));
-                                    edit.putString("Password",document.getString("Password"));
-                                    edit.putString("Email",document.getString("Email"));
-                                    edit.putString("Contact",document.getString("Contact"));
-                                    edit.putString("First Name",document.getString("First Name"));
-                                    edit.putString("Last Name",document.getString("Last Name"));
-                                    edit.putInt("Amount",document.getLong("Amount").intValue());
-                                    edit.putInt("Age", document.getLong("Age").intValue());
-                                    //edit.putString("Code",document.getString("Code"));
-                                    edit.commit();
-                                    startActivity(new Intent(MainActivity.this, firstpage.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                                    finish();
-                                }else
-                                    Toast.makeText(getApplicationContext(),"Incorrect Password",Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "No such user",Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), "get failed with "+task.getException(),Toast.LENGTH_LONG).show();
-                        }
+                    if (uname.length() == 0) {
+                        Snackbar.make(v, "Enter your username", Snackbar.LENGTH_LONG).show();
+                        etUname.requestFocus();
+                        return;
                     }
-                });
 
-            }
-        });
+                    if (pass.length() == 0) {
+                        Snackbar.make(v, "Enter your password", Snackbar.LENGTH_LONG).show();
+                        etPass.requestFocus();
+                        return;
+                    }
 
-        btnReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Register.class);
-                startActivity(i);
-            }
-        });
+                    //check if uname and password exist in database and allow/disallow access accordingly; use finish
+                    DocumentReference ref = db.collection("users").document(uname);
+                    ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document != null && document.exists()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    if (document.get("Password").equals(pass)) {
+                                        SharedPreferences.Editor edit = userdata.edit();
+                                        edit.putString("Username", document.getString("Username"));
+                                        edit.putString("Password", document.getString("Password"));
+                                        edit.putString("Email", document.getString("Email"));
+                                        edit.putString("Contact", document.getString("Contact"));
+                                        edit.putString("First Name", document.getString("First Name"));
+                                        edit.putString("Last Name", document.getString("Last Name"));
+                                        edit.putInt("Amount", document.getLong("Amount").intValue());
+                                        edit.putInt("Age", document.getLong("Age").intValue());
+                                        edit.putString("Type", "LoggedIn");
+                                        //edit.putString("Code",document.getString("Code"));
+                                        edit.commit();
+                                        startActivity(new Intent(MainActivity.this, firstpage.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                        finish();
+                                    }
+                                    else
+                                        Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "No such user", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "get failed with " + task.getException(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
 
+                }
+            });
 
+            btnReg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(MainActivity.this, Register.class);
+                    startActivity(i);
+                }
+            });
+        }
     }
 }
