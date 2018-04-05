@@ -1,15 +1,11 @@
 package com.shwetadsa.bets;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Patterns;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,21 +13,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class Register extends AppCompatActivity {
 
     EditText etFname, etLastname, etMail,  etContact, etUname, etPass, etCpass, etAge;
     Button btnSignup;
     Spinner spnLoc;
-    FirebaseFirestore db ;
+
+    DatabaseHelper db = new DatabaseHelper(this);
+
     private String fname, lname, email, contact, uname, pass, confirm_pass, location, age;
-    //private int newage;
     String[] loc;
     ArrayAdapter<String> adapter;
 
@@ -39,8 +29,6 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        db = FirebaseFirestore.getInstance();
 
         etFname = findViewById(R.id.etFname);
         etLastname = findViewById(R.id.etLastname);
@@ -89,7 +77,6 @@ public class Register extends AppCompatActivity {
 
     public boolean validate(){
         boolean valid = true;
-        //newage = Integer.parseInt(age);
         if (fname.isEmpty()){
             etFname.setError("Please enter valid first name");
             valid=false;
@@ -126,63 +113,56 @@ public class Register extends AppCompatActivity {
             etCpass.setError("please enter the same passwords at both places");
             valid=false;
         }
-
         return valid;
     }
 
     public void onSignupSuccess(){
-        //to add rs.100
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You will need to add Rs 100 into your account to carry out transactions.\nDo you wish to proceed?");
-        builder.setCancelable(false);
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-                Toast.makeText(Register.this, "You need to have minimum Rs. 100 in your wallet", Toast.LENGTH_SHORT).show();
-            }
-        });
+        Boolean chkemail = db.chkemail(email);
+     if (chkemail == true) {
+       Boolean chkuname = db.chkuname(uname);
+       if (chkuname == true) {
+           //to add rs.100
+           AlertDialog.Builder builder = new AlertDialog.Builder(this);
+           builder.setMessage("You will need to add Rs 100 into your account to carry out transactions.\nDo you wish to proceed?");
+           builder.setCancelable(false);
 
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(Register.this, "Rs. 100 has been added into your wallet", Toast.LENGTH_SHORT).show();
+           builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialogInterface, int i) {
+                   dialogInterface.cancel();
+                   Toast.makeText(Register.this, "You need to have minimum Rs. 100 in your wallet", Toast.LENGTH_SHORT).show();
+               }
+           });
 
-                int p = spnLoc.getSelectedItemPosition();
-                location =loc[p];
+           builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialogInterface, int i) {
+                   Toast.makeText(Register.this, "Rs. 100 has been added into your wallet", Toast.LENGTH_SHORT).show();
 
-                int newage = Integer.parseInt(age);
+                   int p = spnLoc.getSelectedItemPosition();
+                   location = loc[p];
 
-                Map<String, Object> m = new HashMap<>();
-                m.put("First Name", fname);
-                m.put("Last Name", lname);
-                m.put("Email", email);
-                m.put("Contact", contact);
-                m.put("Username", uname);
-                m.put("Password", pass);
-                m.put("Amount", 100);
-                m.put("Age", newage);
-                m.put("Location",location);
-                db.collection("users").document(uname).set(m).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(),"Account Created, Login now",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Register.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(),"Something went Wrong",Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+                   int newage = Integer.parseInt(age);
+                   int amount = 100;
+                   Boolean insert = db.insert(fname, lname, email, contact, location, newage, uname, pass, amount);
+                   if (insert == true) {
+                       Toast.makeText(getApplicationContext(), "Account Created, Login now", Toast.LENGTH_LONG).show();
+                       startActivity(new Intent(Register.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                       finish();
+                   }
+               }
+           });
 
-        AlertDialog alert = builder.create();
-        alert.setTitle("Confirm!");
-        alert.show();
+           AlertDialog alert = builder.create();
+           alert.setTitle("Confirm!");
+           alert.show();
+       }else {
+           Toast.makeText(this, "this username already exixts", Toast.LENGTH_SHORT).show();
+       }
+     }else {
+         Toast.makeText(this, "this email already exists", Toast.LENGTH_SHORT).show();
+     }
 
     }
 }

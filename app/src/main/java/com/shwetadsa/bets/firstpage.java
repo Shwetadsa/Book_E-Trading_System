@@ -29,9 +29,10 @@ public class firstpage extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
         btnBrowse = findViewById(R.id.btnBrowse);
         btnReturn = findViewById(R.id.btnReturn);
+
         final SharedPreferences userdata = getSharedPreferences("UserData", Context.MODE_PRIVATE);
-        String fname = userdata.getString("First Name", "");
-        String lname = userdata.getString("Last Name", "");
+        String fname = userdata.getString("First Name", "null");
+        String lname = userdata.getString("Last Name", "null");
         tvWel.setText("Welcome " + fname + " " + lname);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
