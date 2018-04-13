@@ -7,13 +7,89 @@
     tools:context="com.shwetadsa.bets.addbook">
 
     <TextView
-        android:id="@+id/tvDeets"
+        android:id="@+id/tvAddBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
         android:text="Add Book Details"
         android:textSize="20sp"
-        android:textColor="@drawable/bookafterlogin"/>
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etBkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvAddBook"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint=" Book Name..."
+        android:background="@drawable/border" />
+
+    <EditText
+        android:id="@+id/etAuthName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etBkName"
+        android:layout_alignStart="@+id/etBkName"
+        android:layout_below="@+id/etBkName"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:background="@drawable/border"
+        android:inputType="textPersonName"
+        android:hint=" Author Name..." />
+
+    <TextView
+        android:id="@+id/tvGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etAuthName"
+        android:layout_alignStart="@+id/etAuthName"
+        android:layout_below="@+id/etAuthName"
+        android:layout_marginTop="20dp"
+        android:text="GENRE : "
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <Spinner
+        android:id="@+id/spnGenre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvGenre"
+        android:layout_toEndOf="@+id/tvGenre"
+        android:layout_toRightOf="@+id/tvGenre" />
+
+    <Button
+        android:id="@+id/btnChooseImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGenre"
+        android:layout_alignStart="@+id/tvGenre"
+        android:layout_below="@+id/tvGenre"
+        android:layout_marginTop="12dp"
+        android:text="Choose Image " />
+
+    <ImageView
+        android:id="@+id/ivPhoto"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_below="@+id/btnChooseImg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <Button
+        android:id="@+id/btnAddBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPhoto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="submit book details" />
+
 </RelativeLayout>

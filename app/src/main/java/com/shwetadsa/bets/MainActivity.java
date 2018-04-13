@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.stetho.Stetho;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText etUname, etPass;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
 
         etUname = findViewById(R.id.etUname);
